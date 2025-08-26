@@ -13,3 +13,12 @@ MonoBehaviour:
   m_Name: LevelBuilderData
   m_EditorClassIdentifier: 
   _playerSpawnPosition: {x: 0, y: 0, z: -20}
+  _barrackDatas:
+  - position: {x: 8, y: 0, z: -20}
+    faction: 1
+  - position: {x: -8, y: 0, z: -20}
+    faction: 1
+  - position: {x: 8, y: 0, z: 20}
+    faction: 2
+  - position: {x: -8, y: 0, z: 20}
+    faction: 2

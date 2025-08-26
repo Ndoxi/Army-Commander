@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Data;
+using Gameplay;
+using UnityEngine;
 using Zenject;
 
 namespace Core.Infrastracture
@@ -6,10 +8,25 @@ namespace Core.Infrastracture
     public class BuildingFactory
     {
         private readonly IInstantiator _instantiator;
+        private readonly BuildingFactoryData _data;
 
-        public BuildingFactory(IInstantiator instantiator)
+        public BuildingFactory(IInstantiator instantiator, BuildingFactoryData data)
         {
             _instantiator = instantiator;
+            _data = data;
+        }
+
+        public Barrack CreateBarrack(Faction faction, Vector3 position)
+        {
+            return CreateBuilding(_data.barrackPrefab, faction, position);
+        }
+
+        private Barrack CreateBuilding(Barrack prefab, Faction faction, Vector3 position)
+        {
+            var barrack = _instantiator.InstantiatePrefabForComponent<Barrack>(prefab, position, Quaternion.identity, null);
+            barrack.faction = faction;
+
+            return barrack;
         }
     }
 }
