@@ -7,8 +7,6 @@ namespace Gameplay.AI
     public class UnitAI : MonoBehaviour
     {
         [SerializeField] private float _updateRate = 0.2f;
-        [SerializeField] private float _detectionRadius;
-        [SerializeField] private float _attackRange;
         private float _timer;
         private ITickableStateMachine _stateMachine;
 
@@ -18,15 +16,9 @@ namespace Gameplay.AI
             _stateMachine = stateMachine;
         }
 
-        private void Awake()
+        private void Start()
         {
-            _stateMachine.Enter<PatrolState>(_detectionRadius, _attackRange);
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _detectionRadius);
+            _stateMachine.Enter<PatrolState>();
         }
 
         private void Update()

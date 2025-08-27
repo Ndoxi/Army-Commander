@@ -7,17 +7,16 @@ namespace Data
     [CreateAssetMenu(fileName = "LevelBuilderData", menuName = "Scriptable Objects/LevelBuilderData")]
     public class LevelBuilderData : ScriptableObject
     {
-        public Vector3 playerSpawnPosition => _playerSpawnPosition;
-        public BarrackSpawnPointData[] barrackDatas => _barrackDatas;
+        public SpawnPointData[] spawnPointDatas => _spawnPointDatas;
+        [SerializeField] private SpawnPointData[] _spawnPointDatas;
 
-        [SerializeField] private Vector3 _playerSpawnPosition;
-        [SerializeField] private BarrackSpawnPointData[] _barrackDatas;
 
         [Serializable]
-        public struct BarrackSpawnPointData
+        public struct SpawnPointData
         {
             public Vector3 position;
             public Quaternion rotation;
+            public EntityType entityType;
             public Faction faction;
         }
     }

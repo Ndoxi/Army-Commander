@@ -5,22 +5,23 @@ namespace Core.Infrastracture
     public class LevelBuilder
     {
         private readonly LevelBuilderData _data;
-        private readonly UnitFactory _unitFactory;
-        private readonly BuildingFactory _buildingFactory;
+        private readonly EntityFactory _entityFactory;
 
-        public LevelBuilder(LevelBuilderData data, UnitFactory unitFactory, BuildingFactory buildingFactory)
+        public LevelBuilder(LevelBuilderData data, EntityFactory entityFactory)
         {
             _data = data;
-            _unitFactory = unitFactory;
-            _buildingFactory = buildingFactory;
+            _entityFactory = entityFactory;
         }
 
         public void CreateLevel()
         {
-            _unitFactory.CreatePlayer(Gameplay.Faction.Player, _data.playerSpawnPosition);
-
-            foreach (var data in _data.barrackDatas)
-                _buildingFactory.CreateBarrack(data.faction, data.position, data.rotation);
+            foreach (var spawnPoint in _data.spawnPointDatas)
+            {
+                _entityFactory.Create(spawnPoint.entityType,
+                                      spawnPoint.faction,
+                                      spawnPoint.position,
+                                      spawnPoint.rotation);
+            }
         }
 
         public void DestroyLevel()

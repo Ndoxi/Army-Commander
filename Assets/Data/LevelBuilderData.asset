@@ -12,17 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ebc333179207994c98cb5d73745f3b4, type: 3}
   m_Name: LevelBuilderData
   m_EditorClassIdentifier: 
-  _playerSpawnPosition: {x: 0, y: 0, z: -20}
-  _barrackDatas:
-  - position: {x: 8, y: 0, z: -20}
+  _spawnPointDatas:
+  - position: {x: 0, y: 0, z: -20}
     rotation: {x: 0, y: 0, z: 0, w: 0}
+    entityType: 1
     faction: 1
-  - position: {x: -8, y: 0, z: -20}
+  - position: {x: -6, y: 0, z: -20}
     rotation: {x: 0, y: 0, z: 0, w: 0}
+    entityType: 3
     faction: 1
-  - position: {x: 8, y: 0, z: 20}
+  - position: {x: 6, y: 0, z: -20}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    entityType: 3
+    faction: 1
+  - position: {x: -6, y: 0, z: 20}
     rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    entityType: 3
     faction: 2
-  - position: {x: -8, y: 0, z: 20}
+  - position: {x: 6, y: 0, z: 20}
     rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    entityType: 3
     faction: 2

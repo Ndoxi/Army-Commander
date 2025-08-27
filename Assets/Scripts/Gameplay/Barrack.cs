@@ -1,36 +1,28 @@
 ﻿using Core.Infrastracture;
+using Gameplay.Stats;
 using System.Collections;
 using UnityEngine;
 using Zenject;
 
 namespace Gameplay
 {
-    public class Barrack : MonoBehaviour, IEntity
+    public class Barrack : Entity
     {
-        public Faction faction { get => _faction; set => _faction = value; }
-        public Vector3 position => transform.position;
-
+        [SerializeField] private EntityType _spawnableEntityType;
         [SerializeField] private Vector3 _spawnOffset;
-        [SerializeField] private float _baseSpawnInterval = 1.5f;
-        private UnitFactory _factory;
-        private Faction _faction;
+        private EntityFactory _factory;
         private Coroutine _spawnRoutine;
-        private bool _initialized = false;
-
+        private Stat _spawnRate;
+            
         [Inject]
-        private void Construct(UnitFactory factory)
+        private void Construct(EntityFactory factory)
         {
             _factory = factory;
         }
 
-        public void Init(Faction faction)
+        private void Start()
         {
-            _faction = faction;
-            _initialized = true;
-        }
-
-        private void OnEnable()
-        {
+            _spawnRate = GetStat(StatType.SpawnRate);
             _spawnRoutine = StartCoroutine(SpawnLoopCo());
         }
 
@@ -45,12 +37,15 @@ namespace Gameplay
 
         private IEnumerator SpawnLoopCo()
         {
-            yield return new WaitUntil(() => _initialized);
-
             while (true)
             {
-                _factory.CreateUnit(_faction, transform.position + _spawnOffset, transform.rotation);
-                yield return new WaitForSeconds(_baseSpawnInterval);
+                Vector3 spawnPosition = transform.position 
+                                        + transform.forward * _spawnOffset.z 
+                                        + transform.right * _spawnOffset.x 
+                                        + transform.up * _spawnOffset.y;
+
+                _factory.Create(_spawnableEntityType, _faction, spawnPosition, transform.rotation);
+                yield return new WaitForSeconds(_spawnRate.value);
             }
         }
     }

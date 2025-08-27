@@ -10,7 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e0492f3ff3e94b4eb2dfa4fe433a32d, type: 3}
-  m_Name: UnitFactoryData
+  m_Name: EntityFactoryData
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 3713409178874500187, guid: 71c5b7059adf76843b459a142b321617, type: 3}
-  _unitPrefab: {fileID: 3713409178874500187, guid: 8ab0513511d8a014889717e04fac30cc, type: 3}
+  _data:
+  - type: 1
+    prefab: {fileID: 3713409178874500187, guid: 71c5b7059adf76843b459a142b321617, type: 3}
+  - type: 2
+    prefab: {fileID: 3713409178874500187, guid: 8ab0513511d8a014889717e04fac30cc, type: 3}
+  - type: 3
+    prefab: {fileID: 7039873265352359967, guid: 6260cf72b915caa4393456e8f81ff457, type: 3}

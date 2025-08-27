@@ -77,8 +77,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _updateRate: 0.2
-  _detectionRadius: 15
-  _attackRange: 7.5
 --- !u!54 &188817172328751903
 Rigidbody:
   m_ObjectHideFlags: 0

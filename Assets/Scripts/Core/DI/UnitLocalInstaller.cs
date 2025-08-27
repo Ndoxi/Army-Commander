@@ -8,6 +8,7 @@ namespace Core.DI
     {
         [SerializeField] private Unit _unit;
         [SerializeField] private UnitMovement _unitMovement;
+
         public override void InstallBindings()
         {
             Container.Bind<IEntity>().FromInstance(_unit);

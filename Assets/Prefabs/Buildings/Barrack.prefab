@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1f0a36f03536748acb17295ca1e72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnableEntityType: 2
   _spawnOffset: {x: 0, y: 0, z: 3.5}
-  _baseSpawnInterval: 2.5
 --- !u!54 &8319711584746594823
 Rigidbody:
   m_ObjectHideFlags: 0

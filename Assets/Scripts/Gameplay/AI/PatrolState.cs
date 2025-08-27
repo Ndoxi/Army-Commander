@@ -1,4 +1,5 @@
 ﻿using Core.StateMachines;
+using Gameplay.Stats;
 using UnityEngine;
 using Zenject;
 
@@ -11,8 +12,8 @@ namespace Gameplay.AI
         private readonly UnitMovement _unitMovement;
         private readonly EntityFinder _entityFinder;
         private readonly FactionRelations _relations;
-        private float _detectionRadius;
-        private float _attackRange;
+        private Stat _detectionRadiusStat;
+        private Stat _attackRangeStat;
 
         public PatrolState(LazyInject<ITickableStateMachine> stateMachineContainer,
                            IEntity entity,
@@ -29,26 +30,27 @@ namespace Gameplay.AI
 
         public override void OnEnter(params object[] context)
         {
-            _detectionRadius = ConvertParam<float>(context[0]);
-            _attackRange = ConvertParam<float>(context[1]);
+            _detectionRadiusStat = _entity.GetStat(StatType.VisionRange);
+            _attackRangeStat = _entity.GetStat(StatType.AttackRange);
         }
 
-        public override void OnExit()
-        {
-            _detectionRadius = 0;
-            _attackRange = 0;
-        }
+        public override void OnExit() { }
 
         public override void Tick()
         {
-            var attackTarget = _entityFinder.Find(_entity.position, _relations.GetEnemy(_entity.faction), _attackRange);
+            var attackTarget = _entityFinder.Find(_entity.position,
+                                                  _relations.GetEnemy(_entity.faction),
+                                                  _attackRangeStat.value);
             if (attackTarget != null)
             {
                 _stateMachineContainer.Value.Enter<AttackState>(attackTarget);
                 return;
             }
 
-            var target = _entityFinder.Find(_entity.position, _relations.GetEnemy(_entity.faction), _detectionRadius);
+            var target = _entityFinder.Find(_entity.position,
+                                            _relations.GetEnemy(_entity.faction),
+                                            _detectionRadiusStat.value);
+
             _unitMovement.Move(GetDirection(target));
         }
 
