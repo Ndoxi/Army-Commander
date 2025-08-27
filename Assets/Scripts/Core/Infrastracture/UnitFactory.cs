@@ -19,17 +19,17 @@ namespace Core.Infrastracture
 
         public Unit CreatePlayer(Faction faction, Vector3 position)
         {
-            return CreateUnitInternal(_data.playerPrefab, faction, position);
+            return CreateUnitInternal(_data.playerPrefab, faction, position, Quaternion.identity);
         }
 
-        public Unit CreateUnit(Faction faction, Vector3 position)
+        public Unit CreateUnit(Faction faction, Vector3 position, Quaternion rotation)
         {
-            return CreateUnitInternal(_data.unitPrefab, faction, position);
+            return CreateUnitInternal(_data.unitPrefab, faction, position, rotation);
         }
 
-        private Unit CreateUnitInternal(Unit prefab, Faction faction, Vector3 position)
+        private Unit CreateUnitInternal(Unit prefab, Faction faction, Vector3 position, Quaternion rotation)
         {
-            var unit = _instantiator.InstantiatePrefabForComponent<Unit>(prefab, position, Quaternion.identity, null);
+            var unit = _instantiator.InstantiatePrefabForComponent<Unit>(prefab, position, rotation, null);
             unit.faction = faction;
 
             return unit;

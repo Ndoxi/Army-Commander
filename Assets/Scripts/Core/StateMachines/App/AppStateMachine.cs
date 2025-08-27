@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Core.StateMachines.App
 {
-    public class AppStateMachine : StateMachineBase
+    public class AppStateMachine : StateMachineBase<IState>
     {
         protected override Dictionary<Type, IState> states => _states;
         private readonly Dictionary<Type, IState> _states;

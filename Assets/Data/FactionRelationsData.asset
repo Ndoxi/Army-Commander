@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0492f3ff3e94b4eb2dfa4fe433a32d, type: 3}
-  m_Name: UnitFactoryData
+  m_Script: {fileID: 11500000, guid: 52a198bf47aeea342b6032d5f01fc9ab, type: 3}
+  m_Name: FactionRelationsData
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 3713409178874500187, guid: 71c5b7059adf76843b459a142b321617, type: 3}
-  _unitPrefab: {fileID: 3713409178874500187, guid: 8ab0513511d8a014889717e04fac30cc, type: 3}
+  _relationDatas:
+  - faction: 1
+    enemy: 2
+  - faction: 2
+    enemy: 1

@@ -11,5 +11,5 @@ namespace Data
 
         [SerializeField] private Unit _playerPrefab;
         [SerializeField] private Unit _unitPrefab;
-    }    
+    }       
 }

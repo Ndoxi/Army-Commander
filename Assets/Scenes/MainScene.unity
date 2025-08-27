@@ -467,7 +467,9 @@ GameObject:
   - component: {fileID: 518843063}
   - component: {fileID: 518843062}
   - component: {fileID: 518843064}
+  - component: {fileID: 518843070}
   - component: {fileID: 518843068}
+  - component: {fileID: 518843069}
   - component: {fileID: 518843066}
   - component: {fileID: 518843067}
   - component: {fileID: 518843065}
@@ -493,7 +495,9 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 518843064}
+  - {fileID: 518843070}
   - {fileID: 518843068}
+  - {fileID: 518843069}
   - {fileID: 518843066}
   - {fileID: 518843067}
   - {fileID: 518843065}
@@ -593,6 +597,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _joystickInputReader: {fileID: 623646031}
+--- !u!114 &518843069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518843061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517ffdf81b7fe334ead909d7905efea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data: {fileID: 11400000, guid: f0a8cc27ac290d04e9e8c8a5ff0a88d6, type: 2}
+--- !u!114 &518843070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518843061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7db2300727b094ea6f0056b8bc4e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &623646026
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,15 +16,15 @@ namespace Core.Infrastracture
             _data = data;
         }
 
-        public Barrack CreateBarrack(Faction faction, Vector3 position)
+        public Barrack CreateBarrack(Faction faction, Vector3 position, Quaternion rotation)
         {
-            return CreateBuilding(_data.barrackPrefab, faction, position);
+            return CreateBuilding(_data.barrackPrefab, faction, position, rotation);
         }
 
-        private Barrack CreateBuilding(Barrack prefab, Faction faction, Vector3 position)
+        private Barrack CreateBuilding(Barrack prefab, Faction faction, Vector3 position, Quaternion rotation)
         {
-            var barrack = _instantiator.InstantiatePrefabForComponent<Barrack>(prefab, position, Quaternion.identity, null);
-            barrack.faction = faction;
+            var barrack = _instantiator.InstantiatePrefabForComponent<Barrack>(prefab, position, rotation, null);
+            barrack.Init(faction);
 
             return barrack;
         }

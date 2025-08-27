@@ -17,6 +17,7 @@ namespace Data
         public struct BarrackSpawnPointData
         {
             public Vector3 position;
+            public Quaternion rotation;
             public Faction faction;
         }
     }

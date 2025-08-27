@@ -20,7 +20,7 @@ namespace Core.Infrastracture
             _unitFactory.CreatePlayer(Gameplay.Faction.Player, _data.playerSpawnPosition);
 
             foreach (var data in _data.barrackDatas)
-                _buildingFactory.CreateBarrack(data.faction, data.position);
+                _buildingFactory.CreateBarrack(data.faction, data.position, data.rotation);
         }
 
         public void DestroyLevel()
