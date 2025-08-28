@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Systems
 {
     public class EntityFinder
     {
@@ -24,7 +24,7 @@ namespace Gameplay
                     continue;
 
                 var entity = _buffer[i].attachedRigidbody.GetComponent<IEntity>();
-                if (entity == null || entity.faction != faction) 
+                if (entity == null || entity.faction != faction)
                     continue;
 
                 float sqrDist = (entity.position - center).sqrMagnitude;

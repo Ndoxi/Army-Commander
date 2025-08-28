@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 518843063}
   - component: {fileID: 518843062}
   - component: {fileID: 518843064}
+  - component: {fileID: 518843072}
   - component: {fileID: 518843070}
   - component: {fileID: 518843068}
   - component: {fileID: 518843069}
@@ -495,6 +496,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 518843064}
+  - {fileID: 518843072}
   - {fileID: 518843070}
   - {fileID: 518843068}
   - {fileID: 518843069}
@@ -610,6 +612,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7db2300727b094ea6f0056b8bc4e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lootTable: {fileID: 11400000, guid: 565e2b80611ce524b99189f71aea5e7a, type: 2}
+  _upgradeConfig: {fileID: 11400000, guid: f2e56edb03dcc3546af56ea5eb346446, type: 2}
 --- !u!114 &518843071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +626,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defb72b6561b98444b11ef817bc1ca3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &518843072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518843061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0bf1acf9cd43e4a87005eb79a56b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _factoryData: {fileID: 11400000, guid: 0e2e7fc387855774ab36b45a6d7cadff, type: 2}
 --- !u!1 &623646026
 GameObject:
   m_ObjectHideFlags: 0

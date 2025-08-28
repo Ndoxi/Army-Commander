@@ -33,7 +33,7 @@ namespace Gameplay
 
         private void Move(Vector2 direction)
         {
-            _unitMovement.Move(direction);
+            _unitMovement.SetDirection(direction);
         }
     }
 }

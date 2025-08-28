@@ -1,5 +1,6 @@
 ﻿using Core.StateMachines;
 using Gameplay.Stats;
+using Gameplay.Systems;
 using UnityEngine;
 using Zenject;
 
@@ -34,7 +35,10 @@ namespace Gameplay.AI
             _attackRangeStat = _entity.GetStat(StatType.AttackRange);
         }
 
-        public override void OnExit() { }
+        public override void OnExit() 
+        {
+            _unitMovement.SetDirection(Vector2.zero);
+        }
 
         public override void Tick()
         {
@@ -51,7 +55,7 @@ namespace Gameplay.AI
                                             _relations.GetEnemy(_entity.faction),
                                             _detectionRadiusStat.value);
 
-            _unitMovement.Move(GetDirection(target));
+            _unitMovement.SetDirection(GetDirection(target));
         }
 
         private Vector2 GetDirection(IEntity target)

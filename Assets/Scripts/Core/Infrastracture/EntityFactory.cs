@@ -36,7 +36,7 @@ namespace Core.Infrastracture
                                                                              position,
                                                                              rotation,
                                                                              null);
-            entity.Init(faction, statsConfig);
+            entity.Init(entityType, faction, statsConfig);
 
             return entity;
         }

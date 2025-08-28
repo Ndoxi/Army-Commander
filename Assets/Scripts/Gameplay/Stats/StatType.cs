@@ -6,6 +6,8 @@
         MoveSpeed,
         VisionRange,
         AttackRange,
-        SpawnRate
+        SpawnRate,
+        AttackDamage,
+        AttackSpeed
     }
 }

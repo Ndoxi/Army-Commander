@@ -1,28 +1,54 @@
 ﻿using Core.Infrastracture;
+using Data;
 using Gameplay.Stats;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Gameplay
 {
-    public class Barrack : Entity
+    public class Barrack : Entity, IUpgradable
     {
         [SerializeField] private EntityType _spawnableEntityType;
         [SerializeField] private Vector3 _spawnOffset;
         private EntityFactory _factory;
         private Coroutine _spawnRoutine;
-        private Stat _spawnRate;
-            
+        private Stat _spawnRateStat;
+        private readonly List<string> _upgradeIds = new List<string>();
+        private readonly List<AllyBuffData> _allyBuffs = new List<AllyBuffData>();
+
         [Inject]
         private void Construct(EntityFactory factory)
         {
             _factory = factory;
         }
 
+        public void AddUpgrade(string id, UpgradeType type, StatType statType, float value)
+        {
+            _upgradeIds.Add(id);
+
+            switch (type)
+            {
+                case UpgradeType.BuffStat:
+                    var stat = GetStat(statType);
+                    stat.value += value;
+                    break;
+
+                case UpgradeType.BuffAlly:
+                    _allyBuffs.Add(new AllyBuffData(statType, value));
+                    break;
+            }
+        }
+
+        public string[] GetUpgrades()
+        {
+            return _upgradeIds.ToArray();
+        }
+
         private void Start()
         {
-            _spawnRate = GetStat(StatType.SpawnRate);
+            _spawnRateStat = GetStat(StatType.SpawnRate);
             _spawnRoutine = StartCoroutine(SpawnLoopCo());
         }
 
@@ -44,8 +70,14 @@ namespace Gameplay
                                         + transform.right * _spawnOffset.x 
                                         + transform.up * _spawnOffset.y;
 
-                _factory.Create(_spawnableEntityType, _faction, spawnPosition, transform.rotation);
-                yield return new WaitForSeconds(_spawnRate.value);
+                var entity = _factory.Create(_spawnableEntityType, _faction, spawnPosition, transform.rotation);
+                foreach (var buff in _allyBuffs)
+                {
+                    var stat = entity.GetStat(buff.statType);
+                    stat.value += buff.value;
+                }
+
+                yield return new WaitForSeconds(_spawnRateStat.value);
             }
         }
     }

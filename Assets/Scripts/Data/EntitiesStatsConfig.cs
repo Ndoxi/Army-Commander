@@ -25,5 +25,5 @@ namespace Data
             public StatType type;
             public float baseValue;
         }
-    }
+    }    
 }

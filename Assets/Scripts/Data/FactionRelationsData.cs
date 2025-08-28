@@ -16,5 +16,5 @@ namespace Data
             public Faction faction;
             public Faction enemy;
         }
-    }    
+    }       
 }
