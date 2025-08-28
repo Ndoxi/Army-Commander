@@ -16,7 +16,7 @@ MonoBehaviour:
   - type: 1
     stats:
     - type: 0
-      baseValue: 100
+      baseValue: 50
     - type: 1
       baseValue: 3
   - type: 2
@@ -36,6 +36,10 @@ MonoBehaviour:
   - type: 3
     stats:
     - type: 0
-      baseValue: 100
+      baseValue: 50
     - type: 4
       baseValue: 3.5
+  - type: 4
+    stats:
+    - type: 0
+      baseValue: 150

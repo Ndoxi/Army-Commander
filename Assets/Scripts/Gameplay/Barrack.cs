@@ -3,25 +3,28 @@ using Data;
 using Gameplay.Stats;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using Zenject;
 
 namespace Gameplay
 {
-    public class Barrack : Entity, IUpgradable
+    public class Barrack : Entity, IUpgradable, IInteractable
     {
         [SerializeField] private EntityType _spawnableEntityType;
         [SerializeField] private Vector3 _spawnOffset;
         private EntityFactory _factory;
+        private UpgradesMediator _upgradesMediator;
         private Coroutine _spawnRoutine;
         private Stat _spawnRateStat;
         private readonly List<string> _upgradeIds = new List<string>();
         private readonly List<AllyBuffData> _allyBuffs = new List<AllyBuffData>();
 
         [Inject]
-        private void Construct(EntityFactory factory)
+        private void Construct(EntityFactory factory, UpgradesMediator upgradesMediator)
         {
             _factory = factory;
+            _upgradesMediator = upgradesMediator;
         }
 
         public void AddUpgrade(string id, UpgradeType type, StatType statType, float value)
@@ -44,6 +47,16 @@ namespace Gameplay
         public string[] GetUpgrades()
         {
             return _upgradeIds.ToArray();
+        }
+
+        public void Interact()
+        {
+            _upgradesMediator.SetTarget(this);
+        }
+
+        public void CompleteInteraction()
+        {
+            _upgradesMediator.SetTarget(null);
         }
 
         private void Start()

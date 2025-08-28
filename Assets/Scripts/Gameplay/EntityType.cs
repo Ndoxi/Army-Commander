@@ -5,6 +5,7 @@
         None,
         Player, 
         Unit,
-        Barrack
+        Barrack,
+        Headquarters
     }
 }
