@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using Core.Infrastracture;
+using Data;
 using Gameplay.Systems;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,18 @@ namespace Core.DI
 
         public override void InstallBindings()
         {
+            Container.Bind<EntityTracker>()
+                     .To<EntityTracker>()
+                     .AsSingle();            
+            
+            Container.Bind<LootTracker>()
+                     .To<LootTracker>()
+                     .AsSingle();
+
+            Container.Bind<ProgressTrackerSystem>()
+                     .To<ProgressTrackerSystem>()
+                     .AsSingle();
+
             Container.Bind<CurrencySystem>()
                      .To<CurrencySystem>()
                      .AsSingle();            

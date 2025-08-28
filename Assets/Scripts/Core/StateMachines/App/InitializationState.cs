@@ -11,16 +11,19 @@ namespace Core.StateMachines.App
         private readonly LazyInject<IInputReader> _inputReaderContainer;
         private readonly LazyInject<InteractionMediator> _interactionMediatorContainer;
         private readonly LazyInject<UpgradesMediator> _upgradesMediatorContainer;
+        private readonly LazyInject<EndGameMediator> _endGameMediatorContainer;
 
         public InitializationState(LazyInject<AppStateMachine> stateMachineContainer, 
                                    LazyInject<IInputReader> inputReaderContainer,
                                    LazyInject<InteractionMediator> interactionMediatorContainer,
-                                   LazyInject<UpgradesMediator> upgradesMediatorContainer)
+                                   LazyInject<UpgradesMediator> upgradesMediatorContainer, 
+                                   LazyInject<EndGameMediator> endGameMediatorContainer)
         {
             _stateMachineContainer = stateMachineContainer;
             _inputReaderContainer = inputReaderContainer;
             _interactionMediatorContainer = interactionMediatorContainer;
             _upgradesMediatorContainer = upgradesMediatorContainer;
+            _endGameMediatorContainer = endGameMediatorContainer;
         }
 
         public override void OnEnter(params object[] context)
@@ -28,12 +31,11 @@ namespace Core.StateMachines.App
             _inputReaderContainer.Value.enabled = false;
             _interactionMediatorContainer.Value.Init();
             _upgradesMediatorContainer.Value.Init();
+            _endGameMediatorContainer.Value.Init();
 
             _stateMachineContainer.Value.Enter<GameplayState>();
         }
 
-        public override void OnExit()
-        {
-        }
+        public override void OnExit() { }
     }
 }

@@ -18,6 +18,11 @@ namespace Gameplay
             _mediator = mediator;
         }
 
+        private void OnDisable()
+        {
+            _mediator.SetTarget(null);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.attachedRigidbody != null 

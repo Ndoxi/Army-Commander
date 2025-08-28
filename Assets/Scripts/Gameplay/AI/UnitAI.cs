@@ -21,6 +21,11 @@ namespace Gameplay.AI
             _stateMachine.Enter<PatrolState>();
         }
 
+        private void OnDisable()
+        {
+            _stateMachine.Enter<DeathState>();
+        }
+
         private void Update()
         {
             _timer -= Time.deltaTime;

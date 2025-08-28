@@ -14,6 +14,10 @@ namespace Core.DI
 
             Container.Bind<AttackState>()
                      .To<AttackState>()
+                     .AsTransient();            
+            
+            Container.Bind<DeathState>()
+                     .To<DeathState>()
                      .AsTransient();
 
             Container.Bind<ITickableStateMachine>()

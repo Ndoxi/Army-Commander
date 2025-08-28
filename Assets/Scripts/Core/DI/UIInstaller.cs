@@ -9,6 +9,7 @@ namespace Core.DI
     {
         [SerializeField] private InteractionView _interactionView;
         [SerializeField] private UpgradesView _upgradesView;
+        [SerializeField] private EndGameView _endGameView;
 
         public override void InstallBindings()
         {
@@ -20,7 +21,12 @@ namespace Core.DI
             Container.Bind(typeof(UpgradesMediator), typeof(IDisposable))
                      .To<UpgradesMediator>()
                      .AsSingle()
-                     .WithArguments(_upgradesView);
+                     .WithArguments(_upgradesView);            
+            
+            Container.Bind(typeof(EndGameMediator), typeof(IDisposable))
+                     .To<EndGameMediator>()
+                     .AsSingle()
+                     .WithArguments(_endGameView);
         }
     }
 }

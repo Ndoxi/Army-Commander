@@ -1,4 +1,5 @@
-﻿using Gameplay.Stats;
+﻿using Core.Infrastracture;
+using Gameplay.Stats;
 using Gameplay.Systems;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,13 @@ namespace Gameplay
         protected EntityType _entityType;
         protected Dictionary<StatType, Stat> _stats;
         private DamageSystem _damageSystem;
+        private EntityTracker _entityTracker;
 
         [Inject]
-        private void Construct(DamageSystem damageSystem)
+        private void Construct(DamageSystem damageSystem, EntityTracker entityTracker)
         {
             _damageSystem = damageSystem;
+            _entityTracker = entityTracker;
         }
 
         public void Init(EntityType entityType, Faction faction, Dictionary<StatType, Stat> stats)
@@ -35,11 +38,13 @@ namespace Gameplay
         private void OnEnable()
         {
             _damageSystem.Register(this);
+            _entityTracker.Register(this);
         }
 
         private void OnDisable()
         {
             _damageSystem.Unregister(this);
+            _entityTracker.Unregister(this);
         }
 
         public Stat GetStat(StatType statType)

@@ -27,6 +27,9 @@ namespace UI
         {
             _interactable = interactable;
 
+            if (_view == null)
+                return;
+
             if (interactable != null)
                 _view.Show();
             else

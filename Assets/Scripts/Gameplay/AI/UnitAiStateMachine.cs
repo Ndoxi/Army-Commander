@@ -15,7 +15,8 @@ namespace Gameplay.AI
             _states = new Dictionary<Type, ITickableState>()
             {
                 { typeof(PatrolState), instantiator.Instantiate<PatrolState>() },
-                { typeof(AttackState), instantiator.Instantiate<AttackState>() }
+                { typeof(AttackState), instantiator.Instantiate<AttackState>() },
+                { typeof(DeathState), instantiator.Instantiate<DeathState>() }
             };
         }
 
