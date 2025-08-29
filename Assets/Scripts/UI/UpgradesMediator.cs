@@ -46,7 +46,9 @@ namespace UI
 
         private void BuyUpgrade(Upgrade upgrade)
         {
-            _upgradeSystem.AddUpgrade(_target, upgrade.id);
+            var success = _upgradeSystem.AddUpgrade(_target, upgrade.id);
+            if (success)
+                _view.Remove(upgrade.id);
         }
     }
 }

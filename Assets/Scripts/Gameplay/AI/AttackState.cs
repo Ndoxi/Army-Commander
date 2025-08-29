@@ -16,6 +16,7 @@ namespace Gameplay.AI
         private readonly EntityFinder _entityFinder;
         private readonly FactionRelations _relations;
         private readonly DamageSystem _damageSystem;
+        private readonly LazyInject<UnitAnimator> _unitAnimatorContainer;
         private Stat _attackRangeStat;
         private Stat _attackDamageStat;
         private Stat _attackSpeedStat;
@@ -26,13 +27,15 @@ namespace Gameplay.AI
                            IEntity entity,
                            EntityFinder entityFinder,
                            FactionRelations relations,
-                           DamageSystem damageSystem)
+                           DamageSystem damageSystem, 
+                           LazyInject<UnitAnimator> unitAnimatorContainer)
         {
             _stateMachineContainer = stateMachineContainer;
             _entity = entity;
             _entityFinder = entityFinder;
             _relations = relations;
             _damageSystem = damageSystem;
+            _unitAnimatorContainer = unitAnimatorContainer;
         }
 
         public override void OnEnter(params object[] context)
@@ -65,6 +68,7 @@ namespace Gameplay.AI
         {
             while (_currentTarget != null)
             {
+                _unitAnimatorContainer.Value.Attack();
                 _damageSystem.ApplyDamage(_currentTarget, _attackDamageStat.value);
 
                 bool canceled = await UniTask.Delay(TimeUtils.ToMilliseconds(_attackSpeedStat.value), cancellationToken: cancellationToken)

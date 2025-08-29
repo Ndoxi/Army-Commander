@@ -14,6 +14,7 @@ namespace UI
 
         [SerializeField] private Button _buyButton;
         [SerializeField] private TextMeshProUGUI _textMesh;
+        [SerializeField] private TextMeshProUGUI _priceTextMesh;
         private Upgrade _upgrade;
         private CurrencySystem _currencySystem;
 
@@ -26,7 +27,8 @@ namespace UI
         public void Init(Upgrade upgrade)
         {
             _upgrade = upgrade;
-            _textMesh.text = $"type:{upgrade.type} value:{upgrade.value} cost:{upgrade.cost}";
+            _textMesh.text = upgrade.description;
+            _priceTextMesh.text = upgrade.cost.ToString();
         }
 
         private void OnEnable()
@@ -42,10 +44,8 @@ namespace UI
         private void Buy()
         {
             if (_currencySystem.currency < _upgrade.cost)
-            {
-                Debug.Log("Not enough currency!");
                 return;
-            }
+
             onBuy?.Invoke(_upgrade);
         }
     }

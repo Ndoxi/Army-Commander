@@ -37,6 +37,9 @@ namespace Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.isTrigger)
+                return;
+
             var entity = GetEntity(other);
             if (entity == null || entity.entityType != _allowedEntityType)
                 return;

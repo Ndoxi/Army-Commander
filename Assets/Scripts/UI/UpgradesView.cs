@@ -1,6 +1,7 @@
 using Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -17,7 +18,7 @@ namespace UI
         [SerializeField] private RectTransform _content;
         [SerializeField] private UpgradeView _upgradeViewPrefab;
         private IInstantiator _instantiator;
-        private readonly List<UpgradeView> _views = new List<UpgradeView>();
+        private readonly Dictionary<string, UpgradeView> _views = new Dictionary<string, UpgradeView>();
 
         [Inject]
         private void Construct(IInstantiator instantiator)
@@ -50,16 +51,25 @@ namespace UI
                 view.Init(upgrade);
                 view.onBuy += BuyUpgrade;
 
-                _views.Add(view);
+                _views.Add(upgrade.id, view);
             }
+        }
+
+        public void Remove(string id)
+        {
+            if (!_views.TryGetValue(id, out UpgradeView view))
+                return;
+
+            Destroy(view.gameObject);
+            _views.Remove(id);
         }
 
         public void Hide()
         {
             foreach (var view in _views)
             {
-                view.onBuy -= BuyUpgrade;
-                Destroy(view.gameObject);
+                view.Value.onBuy -= BuyUpgrade;
+                Destroy(view.Value.gameObject);
             }
             _views.Clear();
 

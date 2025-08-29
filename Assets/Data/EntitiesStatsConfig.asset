@@ -18,21 +18,21 @@ MonoBehaviour:
     - type: 0
       baseValue: 50
     - type: 1
-      baseValue: 7.5
+      baseValue: 8.5
   - type: 2
     stats:
     - type: 0
       baseValue: 20
     - type: 1
-      baseValue: 2.35
+      baseValue: 5
     - type: 2
       baseValue: 10
     - type: 3
-      baseValue: 5
+      baseValue: 3.5
     - type: 5
       baseValue: 5
     - type: 6
-      baseValue: 0.75
+      baseValue: 1
   - type: 3
     stats:
     - type: 0

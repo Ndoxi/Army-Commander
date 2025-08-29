@@ -15,6 +15,8 @@ namespace Gameplay
         public EntityType entityType => _entityType;
         public Vector3 position => transform.position;
 
+        [SerializeField] private bool _destroyOnDeathImmediately = true;
+
         protected Faction _faction;
         protected EntityType _entityType;
         protected Dictionary<StatType, Stat> _stats;
@@ -66,10 +68,11 @@ namespace Gameplay
             }
         }
 
-        private void OnDeath()
+        protected virtual void OnDeath()
         {
             onDeath?.Invoke(this);
-            Destroy(gameObject);
+            if (_destroyOnDeathImmediately)
+                Destroy(gameObject);
         }
     }
 }

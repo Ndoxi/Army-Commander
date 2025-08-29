@@ -1,6 +1,7 @@
 ﻿using Core.Infrastracture;
 using Data;
 using Gameplay.Systems;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +26,10 @@ namespace Core.DI
                      .To<ProgressTrackerSystem>()
                      .AsSingle();
 
+            Container.Bind<UnitHudTracker>()
+                     .To<UnitHudTracker>()
+                     .AsSingle();
+
             Container.Bind<CurrencySystem>()
                      .To<CurrencySystem>()
                      .AsSingle();            
@@ -34,7 +39,7 @@ namespace Core.DI
                      .AsSingle()
                      .WithArguments(_upgradeConfig);
 
-            Container.Bind<LootDropSystem>()
+            Container.Bind(typeof(LootDropSystem), typeof(IDisposable))
                      .To<LootDropSystem>()
                      .AsSingle()
                      .WithArguments(_lootTable);
@@ -45,7 +50,7 @@ namespace Core.DI
 
             Container.Bind<DamageSystem>()
                      .To<DamageSystem>()
-                     .AsSingle();
+                     .AsSingle();            
         }
     }
 }

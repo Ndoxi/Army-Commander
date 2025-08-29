@@ -13,6 +13,8 @@ namespace Gameplay
     {
         [SerializeField] private EntityType _spawnableEntityType;
         [SerializeField] private Vector3 _spawnOffset;
+        [SerializeField] private float _spawnRadius = 1f;
+
         private EntityFactory _factory;
         private UpgradesMediator _upgradesMediator;
         private Coroutine _spawnRoutine;
@@ -78,12 +80,15 @@ namespace Gameplay
         {
             while (true)
             {
-                Vector3 spawnPosition = transform.position 
-                                        + transform.forward * _spawnOffset.z 
-                                        + transform.right * _spawnOffset.x 
-                                        + transform.up * _spawnOffset.y;
+                Vector3 spawnCenter = transform.position 
+                                      + transform.forward * _spawnOffset.z 
+                                      + transform.right * _spawnOffset.x 
+                                      + transform.up * _spawnOffset.y;
 
-                var entity = _factory.Create(_spawnableEntityType, _faction, spawnPosition, transform.rotation);
+                Vector2 randomCircle = Random.insideUnitCircle * _spawnRadius;
+                var randomOffset = new Vector3(randomCircle.x, 0, randomCircle.y);
+
+                var entity = _factory.Create(_spawnableEntityType, _faction, spawnCenter + randomOffset, transform.rotation);
                 foreach (var buff in _allyBuffs)
                 {
                     var stat = entity.GetStat(buff.statType);

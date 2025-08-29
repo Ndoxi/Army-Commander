@@ -63,6 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2966467725006997125}
   - component: {fileID: 4763370407582302800}
+  - component: {fileID: -2430756524023219932}
   - component: {fileID: 306887054517134853}
   m_Layer: 0
   m_Name: Headquarters
@@ -98,6 +99,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec61ab7a03ac8594b8c7bd9665854ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnDeathImmediately: 1
+--- !u!114 &-2430756524023219932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5803738779736022632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4489f3696f2d7e04b95637ddbd2009f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &306887054517134853
@@ -155,7 +169,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2.5, z: 0}
-  m_LocalScale: {x: 1, y: 5, z: 1}
+  m_LocalScale: {x: 2, y: 5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2966467725006997125}

@@ -1,19 +1,19 @@
 ﻿using Gameplay;
 using Gameplay.Stats;
 using System;
+using UnityEngine;
 
 namespace Data
 {
     [Serializable]
     public class Upgrade
     {
-        public string id => _id;
+        public string id;
         public UpgradeType type;
         public EntityType targetEntityType;
         public StatType statType;
         public float value;
         public int cost;
-
-        private string _id = Guid.NewGuid().ToString();
+        public string description;
     }
 }

@@ -7,14 +7,17 @@ namespace Core.DI
 {
     public class CameraInstaller : MonoInstaller
     {
-        [SerializeField] private CinemachineCamera _camera;
+        [SerializeField] private Camera _camera;
+        [SerializeField] private CinemachineCamera _cinemachineCamera;
 
         public override void InstallBindings()
         {
+            Container.Bind<Camera>().FromInstance(_camera);
+
             Container.Bind<CameraFollowPlayer>()
                      .To<CameraFollowPlayer>()
                      .AsSingle()
-                     .WithArguments(_camera);
+                     .WithArguments(_cinemachineCamera);
         }
     }
 }

@@ -14,16 +14,17 @@ namespace Gameplay.Systems
             _upgradeConfig = upgradeConfig;
         }
 
-        public void AddUpgrade(IUpgradable entity, string id)
+        public bool AddUpgrade(IUpgradable entity, string id)
         {
             var upgrades = GetUpgrades(entity);
             var upgrade = upgrades.First(u => u.id == id);
 
-            if (_currencySystem.currency <= upgrade.cost)
-                return;
+            if (_currencySystem.currency < upgrade.cost)
+                return false;
 
             _currencySystem.currency -= upgrade.cost;
             entity.AddUpgrade(upgrade.id, upgrade.type, upgrade.statType, upgrade.value);
+            return true;
         }
 
         public Upgrade[] GetUpgrades(IUpgradable entity)

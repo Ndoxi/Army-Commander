@@ -9,11 +9,13 @@ namespace Gameplay.AI
         [SerializeField] private float _updateRate = 0.2f;
         private float _timer;
         private ITickableStateMachine _stateMachine;
+        private IEntity _entity;
 
         [Inject]
-        private void Construct(ITickableStateMachine stateMachine)
+        private void Construct(ITickableStateMachine stateMachine, IEntity entity)
         {
             _stateMachine = stateMachine;
+            _entity = entity;
         }
 
         private void Start()
@@ -21,9 +23,14 @@ namespace Gameplay.AI
             _stateMachine.Enter<PatrolState>();
         }
 
+        private void OnEnable()
+        {
+            _entity.onDeath += Die;
+        }
+
         private void OnDisable()
         {
-            _stateMachine.Enter<DeathState>();
+            _entity.onDeath -= Die;
         }
 
         private void Update()
@@ -39,6 +46,11 @@ namespace Gameplay.AI
         private void UpdateBrain()
         {
             _stateMachine.Tick();
+        }
+
+        private void Die(IEntity entity)
+        {
+            _stateMachine.Enter<DeathState>();
         }
     }
 }
