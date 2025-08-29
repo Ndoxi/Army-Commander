@@ -18,8 +18,8 @@ namespace Gameplay.Systems
 
         public void Init()
         {
-            _player = _entityTracker.entities.Find(entity => entity.entityType == EntityType.Player);
-            _headquarters = _entityTracker.entities.Find(entity => entity.entityType == EntityType.Headquarters);
+            _player = _entityTracker.FindPlayer();
+            _headquarters = _entityTracker.FindHeadquarters();
 
             _player.onDeath += OnPlayerDeath;
             _headquarters.onDeath += OnHeadquartersDeath;

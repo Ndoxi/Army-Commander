@@ -18,7 +18,7 @@ MonoBehaviour:
     - type: 0
       baseValue: 50
     - type: 1
-      baseValue: 3
+      baseValue: 7.5
   - type: 2
     stats:
     - type: 0
