@@ -10,6 +10,7 @@ namespace UI
         private readonly UpgradeSystem _upgradeSystem;
         private readonly UpgradesView _view;
         private IUpgradable _target;
+        private Action _callback;
 
         public UpgradesMediator(UpgradeSystem upgradeSystem, UpgradesView view)
         {
@@ -20,31 +21,32 @@ namespace UI
         public void Init()
         {
             _view.onClose += CloseView;
-            _view.onBuy += BuyUpgrade;
+            _view.onBuy += ApplyUpgrade;
         }
 
         public void Dispose()
         {
             _view.onClose -= CloseView;
-            _view.onBuy -= BuyUpgrade;
+            _view.onBuy -= ApplyUpgrade;
         }
 
-        public void SetTarget(IUpgradable upgradable)
+        public void BeginUpgradeFlow(IUpgradable target, Action onComplete)
         {
-            _target = upgradable;
-
-            if (upgradable != null)
-                _view.Show(_upgradeSystem.GetUpgrades(upgradable));
-            else
-                _view.Hide();
+            _target = target;
+            _callback = onComplete;
+            _view.Show(_upgradeSystem.GetUpgrades(target));
         }
 
         private void CloseView()
         {
+            _target = null;
+            _callback?.Invoke();
+            _callback = null;
+
             _view.Hide();
         }
 
-        private void BuyUpgrade(Upgrade upgrade)
+        private void ApplyUpgrade(Upgrade upgrade)
         {
             var success = _upgradeSystem.AddUpgrade(_target, upgrade.id);
             if (success)

@@ -6,8 +6,10 @@ using Zenject;
 
 namespace Gameplay
 {
+    [RequireComponent(typeof(Collider))]
     public class Interactor : MonoBehaviour
     {
+        private Collider _collider;
         private readonly List<IInteractable> _interactables = new List<IInteractable>();
         private IInteractable _target;
         private InteractionMediator _mediator;
@@ -18,9 +20,20 @@ namespace Gameplay
             _mediator = mediator;
         }
 
+        private void Awake()
+        {
+            _collider = GetComponent<Collider>();
+        }
+
+        private void OnEnable()
+        {
+            SetSearchingState();
+        }
+
         private void OnDisable()
         {
             _mediator.SetTarget(null);
+            FreeTarget();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -45,16 +58,58 @@ namespace Gameplay
                 UpdateTarget();
             }
         }
+        
+        private void SetSearchingState()
+        {
+            SetState(State.Searching);
+        }
+
+        private void SetInteractingState()
+        {
+            SetState(State.Interacting);
+        }
+
+        private void SetState(State state)
+        {
+            switch (state)
+            {
+                case State.Searching:
+                    UpdateTarget();
+                    _collider.enabled = true;
+                    break;
+
+                case State.Interacting:
+                    _collider.enabled = false;
+                    _mediator.SetTarget(null);
+                    FreeTarget();
+                    break;
+            }
+        }
+
+        private void FreeTarget()
+        {
+            if (_target != null)
+            {
+                _target.onInteractionBegin += SetInteractingState;
+                _target.onInteractionEnd += SetSearchingState;
+            }
+            _target = null;
+        }
 
         private void UpdateTarget()
         {
             var newTarget = GetClosestInteractable();
             if (newTarget != _target)
             {
-                if (_target != null)
-                    _target.CompleteInteraction();
+                FreeTarget();
 
                 _target = newTarget;
+                if (_target != null)
+                {
+                    _target.onInteractionBegin += SetInteractingState;
+                    _target.onInteractionEnd += SetSearchingState;
+                }
+
                 _mediator.SetTarget(newTarget);
             }
         }
@@ -80,6 +135,13 @@ namespace Gameplay
             }
 
             return closest;
+        }
+
+
+        private enum State
+        {
+            Searching,
+            Interacting
         }
     }
 }

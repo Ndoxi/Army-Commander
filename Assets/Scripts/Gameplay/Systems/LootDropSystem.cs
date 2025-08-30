@@ -14,19 +14,30 @@ namespace Gameplay.Systems
 
         private readonly LootTable _lootTable;
         private readonly LootFactory _lootFactory;
-        private readonly CancellationTokenSource _cts;
+        private CancellationTokenSource _cts;
 
         public LootDropSystem(LootTable lootTable, LootFactory lootFactory)
         {
             _lootTable = lootTable;
             _lootFactory = lootFactory;
+        }
+
+        public void Init()
+        {
             _cts = new CancellationTokenSource();
+        }
+
+        public void Free()
+        {
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = null;
         }
 
         public void Dispose()
         {
-            _cts.Cancel();
-            _cts.Dispose();
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
 
         public void DropLoot(IEntity entity)

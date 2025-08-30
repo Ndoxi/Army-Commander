@@ -1,4 +1,5 @@
-﻿using UI;
+﻿using System;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,8 @@ namespace Gameplay
     [RequireComponent(typeof(Barrack))]
     public class BarrackInteractable : MonoBehaviour, IInteractable
     {
+        public event Action onInteractionBegin;
+        public event Action onInteractionEnd;
         public Vector3 position => _barrack.position;
 
         private Barrack _barrack;
@@ -25,12 +28,8 @@ namespace Gameplay
 
         public void Interact()
         {
-            _upgradesMediator.SetTarget(_barrack);
-        }
-
-        public void CompleteInteraction()
-        {
-            _upgradesMediator.SetTarget(null);
+            _upgradesMediator.BeginUpgradeFlow(_barrack, () => onInteractionEnd?.Invoke());
+            onInteractionBegin?.Invoke();
         }
     }
 }

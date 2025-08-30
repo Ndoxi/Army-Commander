@@ -23,6 +23,7 @@ namespace UI
 
         private void OnEnable()
         {
+            UpdateView(_currencySystem.currency);
             _currencySystem.onUpdate += UpdateView;
         }
 
