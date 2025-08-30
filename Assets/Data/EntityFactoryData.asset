@@ -21,3 +21,9 @@ MonoBehaviour:
     prefab: {fileID: 7039873265352359967, guid: 6260cf72b915caa4393456e8f81ff457, type: 3}
   - type: 4
     prefab: {fileID: 4763370407582302800, guid: c7e1f3ea502b4a144a8b398f0e027b5a, type: 3}
+  _decoratorData:
+  - type: 3
+    faction: 1
+    components:
+    - _assemblyQualifiedName: Gameplay.BarrackInteractable, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null

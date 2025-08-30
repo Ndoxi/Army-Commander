@@ -2,6 +2,7 @@
 using Data;
 using Gameplay;
 using Gameplay.Stats;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -37,6 +38,7 @@ namespace Core.Infrastracture
                                                                              rotation,
                                                                              null);
             entity.Init(entityType, faction, statsConfig);
+            ExecuteDecorator(entity, entityType, faction);
 
             return entity;
         }
@@ -49,6 +51,17 @@ namespace Core.Infrastracture
         private EntitiesStatsConfig.StatsConfig[] GetStatsConfig(EntityType entityType)
         {
             return _statsConfig.data.First(data => data.type == entityType).stats;
+        }
+
+        private void ExecuteDecorator(Entity target, EntityType entityType, Faction faction)
+        {
+            int index = Array.FindIndex(_data.decoratorData, data => data.type == entityType && data.faction == faction);
+            if (index < 0)
+                return;
+
+            var decorator = _data.decoratorData[index];
+            foreach (var component in decorator.components)
+                _instantiator.InstantiateComponent(component.type, target.gameObject);
         }
     }
 }

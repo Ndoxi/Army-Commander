@@ -8,8 +8,6 @@ namespace Gameplay
 {
     public class Interactor : MonoBehaviour
     {
-        [SerializeField] private Faction _targetFaction;
-
         private readonly List<IInteractable> _interactables = new List<IInteractable>();
         private IInteractable _target;
         private InteractionMediator _mediator;
@@ -28,8 +26,7 @@ namespace Gameplay
         private void OnTriggerEnter(Collider other)
         {
             if (other.attachedRigidbody != null 
-                && other.attachedRigidbody.TryGetComponent<IInteractable>(out var interactable) 
-                && interactable.faction == _targetFaction)
+                && other.attachedRigidbody.TryGetComponent<IInteractable>(out var interactable))
             {
                 if (!_interactables.Contains(interactable))
                 {
