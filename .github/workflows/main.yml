@@ -22,8 +22,9 @@ jobs:
     
       - name: Checkout code
         uses: actions/checkout@v4
-            
-      - uses: xrtk/unity-setup@v7
+        
+      - name: Unity Setup  
+        uses: xrtk/unity-setup@v7
         with:
           build-targets: ${{ env.ANDROID_BUILD_TARGET }}
 
