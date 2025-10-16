@@ -22,12 +22,11 @@ jobs:
           key: Library-${{ hashFiles('**/Packages/manifest.json') }}
           restore-keys: |
             Library-
-
-      - name: Install Unity
-        uses: game-ci/unity-installer@v4
+            
+      - uses: xrtk/unity-setup@v7
         with:
-          unityVersion: auto
-
+          build-targets: $ANDROID_BUILD_TARGET
+          
       - name: Activate Unity License
         uses: xrtk/activate-unity-license@v5
         with:
@@ -38,7 +37,7 @@ jobs:
       - name: Build Android APK
         uses: game-ci/unity-builder@v4
         with:
-          targetPlatform: Android
+          targetPlatform: $ANDROID_BUILD_TARGET
           buildName: ArmyComander
           buildPath: build
 
