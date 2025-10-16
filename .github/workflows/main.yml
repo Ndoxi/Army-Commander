@@ -19,7 +19,15 @@ jobs:
           sudo rm -rf /usr/local/lib/android
           sudo apt-get clean
           df -h
-    
+          
+      - name: Cache Library folder
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-${{ runner.os }}-
+            
       - name: Checkout code
         uses: actions/checkout@v4
         
@@ -28,14 +36,6 @@ jobs:
         with:
           build-targets: ${{ env.ANDROID_BUILD_TARGET }}
 
-      - name: Cache Library folder
-        uses: actions/cache@v3
-        with:
-          path: Library
-          key: Library-${{ hashFiles('**/Packages/manifest.json') }}
-          restore-keys: |
-            Library-
-
       - name: Build Android APK
         uses: game-ci/unity-builder@v4
         env:
@@ -43,6 +43,7 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
+          unityVersion: 2022.3.20f1
           targetPlatform: ${{ env.ANDROID_BUILD_TARGET }}
           buildName: ArmyComander
 
