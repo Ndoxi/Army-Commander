@@ -18,13 +18,6 @@ jobs:
       - uses: xrtk/unity-setup@v7
         with:
           build-targets: ${{ env.ANDROID_BUILD_TARGET }}
-          
-      - name: Activate Unity License
-        uses: xrtk/activate-unity-license@v5
-        with:
-          license-type: 'Personal'
-          username: ${{ secrets.UNITY_EMAIL }}
-          password: ${{ secrets.UNITY_PASSWORD }}
 
       - name: Cache Library folder
         uses: actions/cache@v3
@@ -39,7 +32,6 @@ jobs:
         with:
           targetPlatform: ${{ env.ANDROID_BUILD_TARGET }}
           buildName: ArmyComander
-          buildPath: build
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
