@@ -23,6 +23,11 @@ jobs:
           restore-keys: |
             Library-
 
+      - name: Install Unity
+        uses: game-ci/unity-installer@v4
+        with:
+          unityVersion: auto
+
       - name: Activate Unity License
         uses: xrtk/activate-unity-license@v5
         with:
