@@ -23,7 +23,7 @@ jobs:
         uses: xrtk/activate-unity-license@v5
         with:
           license-type: 'Personal'
-          username: ${{ secrets.UNITY_USERNAME }}
+          username: ${{ secrets.UNITY_EMAIL }}
           password: ${{ secrets.UNITY_PASSWORD }}
 
       - name: Cache Library folder
