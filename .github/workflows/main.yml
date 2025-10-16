@@ -17,7 +17,7 @@ jobs:
             
       - uses: xrtk/unity-setup@v7
         with:
-          build-targets: $ANDROID_BUILD_TARGET
+          build-targets: ${{ env.ANDROID_BUILD_TARGET }}
           
       - name: Activate Unity License
         uses: xrtk/activate-unity-license@v5
@@ -37,7 +37,7 @@ jobs:
       - name: Build Android APK
         uses: game-ci/unity-builder@v4
         with:
-          targetPlatform: $ANDROID_BUILD_TARGET
+          targetPlatform: ${{ env.ANDROID_BUILD_TARGET }}
           buildName: ArmyComander
           buildPath: build
 
