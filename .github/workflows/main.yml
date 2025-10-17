@@ -47,12 +47,13 @@ jobs:
           unityVersion: 6000.0.51f1
           targetPlatform: ${{ env.ANDROID_BUILD_TARGET }}
           buildName: ArmyComander
+          buildsPath: Build
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: ArmyComander
-          path: build/Android
+          path: Build/${{ env.ANDROID_BUILD_TARGET }}
 
       - name: Return Unity License
         if: always()
