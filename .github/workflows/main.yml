@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ArmyComander
-          path: Build/${{ env.ANDROID_BUILD_TARGET }}
+          path: Build/${{ vars.ANDROID_BUILD_TARGET }}
 
       - name: Return Unity License
         if: always()
