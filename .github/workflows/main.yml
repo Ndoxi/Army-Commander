@@ -47,7 +47,3 @@ jobs:
         with:
           name: ArmyComander
           path: Build/${{ vars.ANDROID_BUILD_TARGET }}
-
-      - name: Return Unity License
-        if: always()
-        uses: game-ci/unity-return-license@v2
