@@ -31,6 +31,17 @@ jobs:
             
       - name: Checkout code
         uses: actions/checkout@v4
+        
+      - name: Check Unity working directory
+        run: |
+          echo "Current working directory:"
+          pwd
+          echo "Contents:"
+          ls -la
+      - name: Check Unity project path
+        run: |
+          echo "PROJECT_PATH=$PROJECT_PATH"
+          ls -la "$PROJECT_PATH"
 
       - name: Build Android APK
         uses: game-ci/unity-builder@v4
