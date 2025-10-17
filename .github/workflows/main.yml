@@ -12,14 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Free up disk space
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/lib/android
-          sudo apt-get clean
-          df -h
-          
+      - name: Checkout code
+        uses: actions/checkout@v4        
+        with:
+          fetch-depth: 0
+          lfs: true
+        
       - name: Cache Unity Library
         uses: actions/cache@v3
         with:
@@ -29,20 +27,9 @@ jobs:
             Library-ArmyComander-
             Library-
             
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Free disc space
+        uses: jlumbroso/free-disk-space@v1.3.1
         
-      - name: Check Unity working directory
-        run: |
-          echo "Current working directory:"
-          pwd
-          echo "Contents:"
-          ls -la
-      - name: Check Unity project path
-        run: |
-          echo "PROJECT_PATH=$PROJECT_PATH"
-          ls -la "$PROJECT_PATH"
-
       - name: Build Android APK
         uses: game-ci/unity-builder@v4
         env:
